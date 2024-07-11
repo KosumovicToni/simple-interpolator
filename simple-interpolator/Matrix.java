@@ -50,6 +50,11 @@ public class Matrix
         return tmp;
     }
 
+    public double get_value(int row, int collum)
+    {
+        return this.value[row][collum].get_data();
+    }
+
     public Matrix getInverse(Matrix matrix)
     {
         double det = (matrix.value[0][0].get_data() * (matrix.value[1][1].get_data() * matrix.value[2][2].get_data() -  matrix.value[1][2].get_data() *  matrix.value[2][1].get_data())) - 

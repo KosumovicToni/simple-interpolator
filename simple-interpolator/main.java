@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.FileReader;
+import java.io.PrintWriter;
 
 public class main {
     public static void main(String args[])
@@ -9,12 +10,12 @@ public class main {
     Matrix base = new Matrix(10, 3);
     Matrix last = new Matrix(10, 1);
 
-        try(FileReader file = new FileReader(file_name); Scanner scanner = new Scanner(file))
+        try(FileReader file = new FileReader(file_name); Scanner scanner = new Scanner(file); PrintWriter print = new PrintWriter("Result.txt"))
         {
             int i = 0;
             while(scanner.hasNextLine())
             {
-                String[] line = scanner.nextLine().split(";");
+                String[] line = scanner.nextLine().split(",");
                 
                 double data = Double.parseDouble(line[0]);
 
@@ -33,14 +34,12 @@ public class main {
             Matrix transposed = base.getTransposed();
 
             Matrix a = base.mergeMatrix(transposed, base);
-            a.printAll();
             a = a.getInverse(a);
 
             Matrix b = base.mergeMatrix(transposed, last);
-            b.printAll();
             
             Matrix result = base.mergeMatrix(a,b);
-            result.printAll();
+            print.println(result.get_value(0, 0) + "*x^2 + (" + result.get_value(1, 0) + ")*x + (" + result.get_value(2, 0) + ")");
         }
         catch(Exception e)
         {
